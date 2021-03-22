@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS "fabric"(
     "length" INT NOT NULL,
     "type" TEXT,
     "notice" TEXT,
-    "color" TEXT
+    "color" TEXT,
 );
 
 -- Sewing thread table
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS "sewing_thread"(
     "color" TEXT,
     "type" TEXT,
     "reference" TEXT,
-    "stock" INT
+    "stock" INT,
 );
 
 -- Sewing pattern table
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS "sewing_pattern"(
     "picture" TEXT,
     "brand" TEXT,
     "type" TEXT NOT NULL,
-    "target" TEXT
+    "target" TEXT,
 );
 
 -- User table
@@ -41,9 +41,19 @@ CREATE TABLE IF NOT EXISTS "user" (
     "id" serial PRIMARY KEY,
     "name" TEXT NOT NULL,
     "password" TEXT NOT NUll
-    "fabric_id" integer NOT NULL REFERENCES "fabric" ("id"),
-    "sewing_thread_id" integer NOT NULL REFERENCES "sewing_thread" ("id"),
-    "sewing_pattern_id" integer NOT NULL REFERENCES "sewing_pattern" ("id"),
+    "fabric_id" INT NOT NULL REFERENCES "fabric"("id"),
+    "sewing_thread_id" INT NOT NULL REFERENCES "sewing_thread"("id"),
+    "sewing_pattern_id" INT NOT NULL REFERENCES "sewing_pattern"("id"),
 );
+
+-- Add foreign keys
+ALTER TABLE "fabric"
+    ADD FOREIGN KEY ("user_id") REFERENCES "user"("id");
+
+ALTER TABLE "sewing_thread"
+    ADD FOREIGN KEY ("user_id") REFERENCES "user"("id");
+
+ALTER TABLE "sewing_pattern"
+    ADD FOREIGN KEY ("user_id") REFERENCES "user"("id");
 
 COMMIT;
