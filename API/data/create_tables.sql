@@ -1,59 +1,50 @@
 BEGIN;
 
-DROP TABLE IF EXISTS "fabric", 
+DROP TABLE IF EXISTS "sewaddict",
+"fabric", 
 "sewing_thread", 
-"sewing_pattern",
-"user";
+"sewing_pattern";
+
+-- User table
+CREATE TABLE IF NOT EXISTS "sewaddict" (
+    "id" serial PRIMARY KEY,
+    "name" TEXT NOT NULL,
+    "password" TEXT NOT NUll
+);
 
 -- Fabric table
 CREATE TABLE IF NOT EXISTS "fabric"(
     "id" serial PRIMARY KEY,
-    "picture" TEXT,
+    "picture" TEXT DEFAULT './public/fabrics.jpeg',
     "width" INT NOT NULL DEFAULT 140,
     "length" INT NOT NULL,
     "type" TEXT,
     "notice" TEXT,
     "color" TEXT,
+    "sewaddict_id" INT REFERENCES "sewaddict"("id")
 );
 
 -- Sewing thread table
 CREATE TABLE IF NOT EXISTS "sewing_thread"(
     "id" serial PRIMARY KEY,
-    "picture" TEXT,
+    "picture" TEXT DEFAULT './public/threads.jpeg',
     "brand" TEXT,
     "color" TEXT,
-    "type" TEXT,
+    "type" TEXT DEFAULT 'bobine',
     "reference" TEXT,
     "stock" INT,
+    "sewaddict_id" INT REFERENCES "sewaddict"("id")
 );
 
 -- Sewing pattern table
 CREATE TABLE IF NOT EXISTS "sewing_pattern"(
     "id" serial PRIMARY KEY,
-    "picture" TEXT,
+    "picture" TEXT DEFAULT './public/patterns.jpeg',
     "brand" TEXT,
+    "name" TEXT,
     "type" TEXT NOT NULL,
     "target" TEXT,
+    "sewaddict_id" INT REFERENCES "sewaddict"("id")
 );
-
--- User table
-CREATE TABLE IF NOT EXISTS "user" (
-    "id" serial PRIMARY KEY,
-    "name" TEXT NOT NULL,
-    "password" TEXT NOT NUll
-    "fabric_id" INT NOT NULL REFERENCES "fabric"("id"),
-    "sewing_thread_id" INT NOT NULL REFERENCES "sewing_thread"("id"),
-    "sewing_pattern_id" INT NOT NULL REFERENCES "sewing_pattern"("id"),
-);
-
--- Add foreign keys
-ALTER TABLE "fabric"
-    ADD FOREIGN KEY ("user_id") REFERENCES "user"("id");
-
-ALTER TABLE "sewing_thread"
-    ADD FOREIGN KEY ("user_id") REFERENCES "user"("id");
-
-ALTER TABLE "sewing_pattern"
-    ADD FOREIGN KEY ("user_id") REFERENCES "user"("id");
 
 COMMIT;
