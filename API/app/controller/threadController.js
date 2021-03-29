@@ -36,6 +36,30 @@ const threadController = {
             next(error);
         }
     },
+        async create(request, response, next) {
+        try {
+            const picture = request.body.picture;
+            const brand = request.body.brand;
+            const color = request.body.color;
+            const type = request.body.type;
+            const reference = request.body.reference;
+            const stock = request.body.stock;
+            const sewaddict_id = request.params.id;
+
+            const savedThread = await threadDataMapper.createThread(picture, brand, color, type, reference, stock, sewaddict_id);
+
+            if (!savedThread) {
+                response.status(404);
+                console.log("Fil non sauvegardé");
+                next();
+                return;
+            } else {
+                response.json({ savedThread })
+            }
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = threadController;

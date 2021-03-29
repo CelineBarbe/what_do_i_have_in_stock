@@ -20,6 +20,12 @@ const threadDataMapper = {
         } else {
             return result.rows[0];
         };
+    },
+        async createThread(picture, brand, color, type, reference, stock, sewaddict_id) {
+
+        const result = await client.query(`INSERT INTO sewing_thread(picture, brand, color, type, reference, stock, sewaddict_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`, [picture, brand, color, type, reference, stock, sewaddict_id]);
+        
+        return result.rows[0];
     }
 };
 

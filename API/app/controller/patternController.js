@@ -36,6 +36,29 @@ const patternController = {
             next(error);
         }
     },
+    async create(request, response, next) {
+        try {
+            const picture = request.body.picture;
+            const brand = request.body.brand;
+            const name = request.body.name;
+            const type = request.body.type;
+            const target = request.body.target;
+            const sewaddict_id = request.params.id;
+      
+            const savedPattern = await patternDataMapper.createPattern(picture, brand, name, type, target, sewaddict_id);
+
+            if (!savedPattern) {
+                response.status(404);
+                console.log("Patron non sauvegardé");
+                next();
+                return;
+            } else {
+                response.json({ savedPattern })
+            }
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = patternController;

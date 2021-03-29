@@ -7,14 +7,14 @@ DROP TABLE IF EXISTS "sewaddict",
 
 -- User table
 CREATE TABLE IF NOT EXISTS "sewaddict" (
-    "id" serial PRIMARY KEY,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" TEXT NOT NULL,
     "password" TEXT NOT NUll
 );
 
 -- Fabric table
 CREATE TABLE IF NOT EXISTS "fabric"(
-    "id" serial PRIMARY KEY,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "picture" TEXT DEFAULT './public/fabrics.jpeg',
     "width" INT NOT NULL DEFAULT 140,
     "length" INT NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS "fabric"(
 
 -- Sewing thread table
 CREATE TABLE IF NOT EXISTS "sewing_thread"(
-    "id" serial PRIMARY KEY,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "picture" TEXT DEFAULT './public/threads.jpeg',
     "brand" TEXT,
     "color" TEXT,
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS "sewing_thread"(
 
 -- Sewing pattern table
 CREATE TABLE IF NOT EXISTS "sewing_pattern"(
-    "id" serial PRIMARY KEY,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "picture" TEXT DEFAULT './public/patterns.jpeg',
     "brand" TEXT,
     "name" TEXT,

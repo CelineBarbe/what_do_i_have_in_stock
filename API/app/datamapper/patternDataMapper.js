@@ -20,6 +20,12 @@ const patternDataMapper = {
         } else {
             return result.rows[0];
         };
+    },
+    async createPattern(picture, brand, name, type, target, sewaddict_id) {
+
+        const result = await client.query(`INSERT INTO sewing_pattern(picture, brand, name, type, target, sewaddict_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, [picture, brand, name, type, target, sewaddict_id]);
+        
+        return result.rows[0];
     }
 };
 

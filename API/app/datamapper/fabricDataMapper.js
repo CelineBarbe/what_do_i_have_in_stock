@@ -21,7 +21,14 @@ const fabricDataMapper = {
         } else {
             return result.rows[0];
         };
+    },
+
+    async createFabric(picture, width, length, type, notice, color, sewaddict_id) {
+
+        const result = await client.query(`INSERT INTO fabric(picture, width, length, type, notice, color, sewaddict_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`, [picture, width, length, type, notice, color, sewaddict_id]);
+        
+        return result.rows[0];
     }
 };
 
-module.exports = fabricDataMapper;
+module.exports = fabricDataMapper
