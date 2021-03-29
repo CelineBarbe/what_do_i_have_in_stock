@@ -19,7 +19,6 @@ const fabricController = {
             next(error);
         }
     },
-
     async findById(request, response, next) {
         try {
             const sewaddict_id = request.params.id;
@@ -39,7 +38,6 @@ const fabricController = {
             next(error);
         }
     },
-
     async create(request, response, next) {
         try {
             const picture = request.body.picture;
@@ -59,6 +57,23 @@ const fabricController = {
                 return;
             } else {
                 response.json({ savedFabric })
+            }
+        } catch (error) {
+            next(error);
+        }
+    },
+    async delete(request, response, next) {
+        try {
+            const sewaddict_id = request.params.id;
+            const id = request.params.fabricId;
+
+            const deletedFabric = await fabricDataMapper.deleteFabric(id, sewaddict_id);
+
+            if (!deletedFabric) {
+                next();
+                return;
+            } else {
+                response.json({ message: 'Tissu supprimé' });
             }
         } catch (error) {
             next(error);

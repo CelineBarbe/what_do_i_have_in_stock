@@ -36,7 +36,7 @@ const threadController = {
             next(error);
         }
     },
-        async create(request, response, next) {
+    async create(request, response, next) {
         try {
             const picture = request.body.picture;
             const brand = request.body.brand;
@@ -55,6 +55,23 @@ const threadController = {
                 return;
             } else {
                 response.json({ savedThread })
+            }
+        } catch (error) {
+            next(error);
+        }
+    },
+    async delete(request, response, next) {
+        try {
+            const sewaddict_id = request.params.id;
+            const id = request.params.threadId;
+
+            const deletedThread = await threadDataMapper.deleteThread(id, sewaddict_id);
+
+            if (!deletedThread) {
+                next();
+                return;
+            } else {
+                response.json({ message: 'Fil supprimé' });
             }
         } catch (error) {
             next(error);

@@ -58,6 +58,23 @@ const patternController = {
         } catch (error) {
             next(error);
         }
+    },
+    async delete(request, response, next) {
+        try {
+            const sewaddict_id = request.params.id;
+            const id = request.params.patternId;
+
+            const deletedPattern = await patternDataMapper.deletePattern(id, sewaddict_id);
+
+            if (!deletedPattern) {
+                next();
+                return;
+            } else {
+                response.json({ message: 'Patron supprimé' });
+            }
+        } catch (error) {
+            next(error);
+        }
     }
 }
 
