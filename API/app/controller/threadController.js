@@ -76,6 +76,31 @@ const threadController = {
         } catch (error) {
             next(error);
         }
+    },
+    async update(request, response, next) {
+        try {
+            const picture = request.body.picture;
+            const brand = request.body.brand;
+            const color = request.body.color;
+            const type = request.body.type;
+            const reference = request.body.reference;
+            const stock = request.body.stock;
+            const sewaddict_id = request.params.id;
+            const id = request.params.threadId;
+
+            const updatedThread = await threadDataMapper.updateThread(id, picture, brand, color, type, reference, stock, sewaddict_id);
+
+            if (!updatedThread) {
+                response.status(404);
+                console.log("Fil non sauvegardé");
+                next();
+                return;
+            } else {
+                response.json({ updatedThread });
+            } 
+        } catch (error) {
+            next(error);
+        }
     }
 }
 

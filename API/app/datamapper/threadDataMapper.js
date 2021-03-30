@@ -36,6 +36,16 @@ const threadDataMapper = {
             const deleteThread = await client.query(`DELETE FROM sewing_thread WHERE id = $1 AND sewaddict_id = $2`, [id, sewaddict_id]);
             return deleteThread.rowCount;
         }
+    },
+    async updateThread(id, picture, brand, color, type, reference, stock, sewaddict_id) {
+        const thread = await client.query(`SELECT * FROM sewing_thread WHERE id = $1 AND sewaddict_id = $2`, [id, sewaddict_id]);
+
+        if (thread.rowCount == 0) {
+            return null;
+        } 
+        const updateThread = await client.query(`UPDATE sewing_thread SET picture = $1, brand = $2, color = $3, type = $4, reference = $5, stock = $6, sewaddict_id = $7 WHERE id = $8 RETURNING *`, [picture, brand, color, type, reference, stock, sewaddict_id, id]);
+
+        return updateThread.rowCount
     }
     
 };

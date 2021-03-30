@@ -75,6 +75,30 @@ const patternController = {
         } catch (error) {
             next(error);
         }
+    },
+    async update(request, response, next) {
+        try {
+            const picture = request.body.picture;
+            const brand = request.body.brand;
+            const name = request.body.name;
+            const type = request.body.type;
+            const target = request.body.target;
+            const sewaddict_id = request.params.id;
+            const id = request.params.patternId;
+
+            const updatedPattern = await patternDataMapper.updatePattern(id, picture, brand, name, type, target, sewaddict_id);
+
+            if (!updatedPattern) {
+                response.status(404);
+                console.log("Patron non sauvegardé");
+                next();
+                return;
+            } else {
+                response.json({ updatedPattern });
+            } 
+        } catch (error) {
+            next(error);
+        }
     }
 }
 

@@ -36,6 +36,16 @@ const patternDataMapper = {
             const deletePattern = await client.query(`DELETE FROM sewing_pattern WHERE id = $1 AND sewaddict_id = $2`, [id, sewaddict_id]);
             return deletePattern.rowCount;
         }
+    },
+    async updatePattern(id, picture, brand, name, type, target, sewaddict_id) {
+        const pattern = await client.query(`SELECT * FROM sewing_pattern WHERE id = $1 AND sewaddict_id = $2`, [id, sewaddict_id]);
+
+        if (pattern.rowCount == 0) {
+            return null;
+        } 
+        const updatePattern = await client.query(`UPDATE sewing_pattern SET picture = $1, brand = $2, name = $3, type = $4, target = $5, sewaddict_id = $6 WHERE id = $7 RETURNING *`, [picture, brand, name, type, target, sewaddict_id, id]);
+
+        return updatePattern.rowCount
     }
 };
 

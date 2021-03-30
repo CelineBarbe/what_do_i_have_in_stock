@@ -36,6 +36,16 @@ const fabricDataMapper = {
             const deleteFabric = await client.query(`DELETE FROM fabric WHERE id = $1 AND sewaddict_id = $2`, [id, sewaddict_id]);
             return deleteFabric.rowCount;
         }
+    },
+    async updateFabric(id, picture, width, length, type, notice, color, sewaddict_id) {
+        const fabric = await client.query(`SELECT * FROM fabric WHERE id = $1 AND sewaddict_id = $2`, [id, sewaddict_id]);
+
+        if (fabric.rowCount == 0) {
+            return null;
+        } 
+        const updateFabric = await client.query(`UPDATE fabric SET picture = $1, width = $2, length = $3, type = $4, notice = $5, color = $6, sewaddict_id = $7 WHERE id = $8 RETURNING *`, [picture, width, length, type, notice, color, sewaddict_id, id]);
+
+        return updateFabric.rowCount
     }
 };
 
