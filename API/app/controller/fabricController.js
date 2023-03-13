@@ -1,4 +1,3 @@
-const { updateFabric } = require('../datamapper/fabricDataMapper');
 const fabricDataMapper = require('../datamapper/fabricDataMapper');
 
 const fabricController = {
