@@ -18,9 +18,9 @@ INSERT INTO "sewing_thread" ("picture", "brand", "color", "type", "reference", "
 ('./public/threads.jpeg', 'Guttermann', 'rose', 'bobine', 'col 473', 1, 2);
 
 INSERT INTO "sewing_pattern" ("picture", "brand", "name", "type", "target", "sewaddict_id") VALUES
-('./public/patterns.jpeg', 'Deer and Doe', 'Robe Magolia', 'robe', 'femme', 1),
-('./public/patterns.jpeg', 'Ivanne S', 'Manteau Magnésium', 'manteau', 'femme', 1),
-('./public/patterns.jpeg', 'Ellie & Mac', 'Be Amazing Dress and Top', 'robe, top', 'enfant', 2),
-('./public/patterns.jpeg', 'Ellie & Mac', 'Colorblock zip swimsuit', 'maillot de bains', 'femme', 2);
+('https://firebasestorage.googleapis.com/v0/b/whatdoihaveinstock.appspot.com/o/patterns.jpeg?alt=media&token=98686edd-62f9-491d-802b-fc7a3c913e23', 'Deer and Doe', 'Robe Magolia', 'robe', 'femme', 1),
+('https://firebasestorage.googleapis.com/v0/b/whatdoihaveinstock.appspot.com/o/patterns.jpeg?alt=media&token=98686edd-62f9-491d-802b-fc7a3c913e23', 'Ivanne S', 'Manteau Magnésium', 'manteau', 'femme', 1),
+('https://firebasestorage.googleapis.com/v0/b/whatdoihaveinstock.appspot.com/o/patterns.jpeg?alt=media&token=98686edd-62f9-491d-802b-fc7a3c913e23', 'Ellie & Mac', 'Be Amazing Dress and Top', 'robe, top', 'enfant', 2),
+('https://firebasestorage.googleapis.com/v0/b/whatdoihaveinstock.appspot.com/o/patterns.jpeg?alt=media&token=98686edd-62f9-491d-802b-fc7a3c913e23', 'Ellie & Mac', 'Colorblock zip swimsuit', 'maillot de bains', 'femme', 2);
 
 COMMIT;

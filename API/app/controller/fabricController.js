@@ -1,4 +1,3 @@
-const { updateFabric } = require('../datamapper/fabricDataMapper');
 const fabricDataMapper = require('../datamapper/fabricDataMapper');
 
 const fabricController = {
@@ -44,6 +43,7 @@ const fabricController = {
             const picture = request.body.picture;
             const width = request.body.width;
             const length = request.body.length;
+            // à vérifier
             const type = request.body.type;
             const notice = request.body.notice;
             const color = request.body.color;
